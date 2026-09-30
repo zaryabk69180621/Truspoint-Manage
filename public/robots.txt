@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://truspoint.uk/sitemap.xml
