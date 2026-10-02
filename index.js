@@ -29,18 +29,20 @@ app.use((req, res, next) => {
   next();
 });
 
-// Serve static files
+// Serve static files from root and fallback to public
+app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Sitemap route
 app.get('/sitemap.xml', (req, res) => {
   res.setHeader('Content-Type', 'application/xml');
-  res.sendFile(path.join(__dirname, 'public', 'sitemap.xml'));
+  const sitemapPath = path.join(__dirname, 'sitemap.xml');
+  res.sendFile(sitemapPath);
 });
 
 // Handle 404
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+  res.status(404).sendFile(path.join(__dirname, '404.html'));
 });
 
 app.listen(PORT, () => {

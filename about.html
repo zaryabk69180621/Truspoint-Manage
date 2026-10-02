@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About TrusPoint Solutions | Our Story, Team & Values</title>
-    <link rel="icon" href="/static/logo.jpg" type="image/jpeg">
+    <link rel="icon" href="static/logo.jpg" type="image/jpeg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- FONT AWESOME & GOOGLE FONTS -->
@@ -14,23 +14,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
     
     <!-- UNIFIED MODERN STYLESHEET -->
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="css/main.css">
     
     <!-- PAGE-SPECIFIC HERO BACKGROUND -->
     <style>
         .hero {
-            background-image: url('/static/aboutbackf.avif');
+            background-image: url('static/aboutbackf.avif');
         }
     </style>
 
 </head>
 <body class="page-about">
+    <!-- Scroll Progress Indicator -->
+    <div id="scrollProgress"></div>
     <!-- Header & Navigation -->
     <header id="header">
         <div class="container nav-container">
             <div class="logo">
                 <a href="index.html" aria-label="TrusPoint Solutions Home">
-                    <img src="/static/logo.jpg" alt="TrusPoint Solutions Logo">
+                    <img src="static/logo.jpg" alt="TrusPoint Solutions Logo">
                 </a>
             </div>
             <nav class="desktop-nav">
@@ -84,6 +86,7 @@
         <div class="floating-element floating-element-3"></div>
         
         <div class="container hero-content">
+            <div class="hero-badge"><span class="badge-dot"></span> Our Story, Vision & Leadership</div>
             <h1 id="heroTitle">About TrusPoint Solutions</h1>
             <p id="heroText">Discover our story, values, and the team behind London's premier integrated service provider</p>
         </div>
@@ -94,7 +97,7 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-image" id="aboutImage">
-                    <img src="/static/aboutback.jpeg" alt="TrusPoint Solutions team">
+                    <img src="static/aboutback.jpeg" alt="TrusPoint Solutions team">
                 </div>
                 <div class="about-text" id="aboutText">
                     <h2 id="aboutHeading">Our Story</h2>
@@ -535,6 +538,33 @@
                 this.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
             });
         });
+    
+        // Million-Dollar Interactions: Scroll Progress & Back to Top
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const backToTop = document.getElementById('backToTop');
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            if (scrollProgress && scrollHeight > 0) {
+                scrollProgress.style.width = (scrollTop / scrollHeight) * 100 + '%';
+            }
+            if (backToTop) {
+                if (scrollTop > 350) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }
+        });
+        const backToTopBtn = document.getElementById('backToTop');
+        if (backToTopBtn) {
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    
     </script>
+    <!-- Back to Top Floating Action -->
+    <button id="backToTop" aria-label="Back to Top"><i class="fas fa-arrow-up"></i></button>
 </body>
 </html>

@@ -53,6 +53,31 @@
       ],
       "serviceType": ["Security Services", "Shipping Services", "Cleaning Services", "Agriculture Harvesting"]
     }
+    
+        // Million-Dollar Interactions: Scroll Progress & Back to Top
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const backToTop = document.getElementById('backToTop');
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            if (scrollProgress && scrollHeight > 0) {
+                scrollProgress.style.width = (scrollTop / scrollHeight) * 100 + '%';
+            }
+            if (backToTop) {
+                if (scrollTop > 350) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }
+        });
+        const backToTopBtn = document.getElementById('backToTop');
+        if (backToTopBtn) {
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    
     </script>
     
     
@@ -63,7 +88,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
     
     <!-- UNIFIED MODERN STYLESHEET -->
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="css/main.css">
     
     <!-- PAGE-SPECIFIC HERO BACKGROUND -->
     <style>
@@ -74,12 +99,14 @@
 
 </head>
 <body class="page-contact">
+    <!-- Scroll Progress Indicator -->
+    <div id="scrollProgress"></div>
     <!-- Header & Navigation -->
     <header id="header">
         <div class="container nav-container">
             <div class="logo">
                 <a href="index.html" aria-label="TrusPoint Solutions Home">
-                    <img src="/static/logo.jpg" alt="TrusPoint Solutions Logo">
+                    <img src="static/logo.jpg" alt="TrusPoint Solutions Logo">
                 </a>
             </div>
             <nav class="desktop-nav">
@@ -136,6 +163,7 @@
         <div class="floating-element floating-element-3"></div>
         
         <div class="container hero-content">
+            <div class="hero-badge"><span class="badge-dot"></span> 24/7 Dedicated Support & Inquiries</div>
             <h1>Contact TrusPoint Solutions</h1>
             <p>Get in touch with our team to discuss how our integrated solutions can benefit your business</p>
         </div>
@@ -577,5 +605,7 @@
             });
         });
     </script>
+    <!-- Back to Top Floating Action -->
+    <button id="backToTop" aria-label="Back to Top"><i class="fas fa-arrow-up"></i></button>
 </body>
 </html>

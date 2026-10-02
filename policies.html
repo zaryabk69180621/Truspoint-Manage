@@ -31,7 +31,7 @@
     <link rel="canonical" href="https://truspoint.uk/policies.html">
     
     <!-- FAVICON -->
-    <link rel="icon" href="/static/logo.jpg" type="image/jpeg">
+    <link rel="icon" href="static/logo.jpg" type="image/jpeg">
     
     <!-- PRELOAD CRITICAL RESOURCES -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -104,6 +104,31 @@
             ]
         }
     }
+    
+        // Million-Dollar Interactions: Scroll Progress & Back to Top
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const backToTop = document.getElementById('backToTop');
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            if (scrollProgress && scrollHeight > 0) {
+                scrollProgress.style.width = (scrollTop / scrollHeight) * 100 + '%';
+            }
+            if (backToTop) {
+                if (scrollTop > 350) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }
+        });
+        const backToTopBtn = document.getElementById('backToTop');
+        if (backToTopBtn) {
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    
     </script>
 
     <!-- ADDITIONAL SEO META TAGS -->
@@ -120,7 +145,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
     
     <!-- UNIFIED MODERN STYLESHEET -->
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="css/main.css">
     
     <!-- PAGE-SPECIFIC HERO BACKGROUND -->
     <style>
@@ -131,12 +156,14 @@
 
 </head>
 <body class="page-policies">
+    <!-- Scroll Progress Indicator -->
+    <div id="scrollProgress"></div>
     <!-- Header & Navigation -->
     <header id="header">
         <div class="container nav-container">
             <div class="logo">
                 <a href="index.html" aria-label="TrusPoint Solutions Home">
-                    <img src="/static/logo.jpg" alt="TrusPoint Solutions Logo">
+                    <img src="static/logo.jpg" alt="TrusPoint Solutions Logo">
                 </a>
             </div>
             <nav class="desktop-nav">
@@ -184,6 +211,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container hero-content">
+            <div class="hero-badge"><span class="badge-dot"></span> Compliance, Health & Safety Standards</div>
             <h1>Company Policies</h1>
             <p>Our commitment to transparency, compliance, and ethical business practices</p>
         </div>
@@ -517,5 +545,7 @@
             window.addEventListener('scroll', animateOnScroll);
         });
     </script>
+    <!-- Back to Top Floating Action -->
+    <button id="backToTop" aria-label="Back to Top"><i class="fas fa-arrow-up"></i></button>
 </body>
 </html>

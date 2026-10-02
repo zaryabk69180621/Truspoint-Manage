@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Not Found (404) | TrusPoint Solutions</title>
     <meta name="robots" content="noindex, follow">
-    <link rel="icon" href="/static/logo.jpg" type="image/jpeg">
+    <link rel="icon" href="static/logo.jpg" type="image/jpeg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="css/main.css">
     <style>
         .error-section {
             padding: 12rem 0 8rem;
@@ -88,12 +88,14 @@
     </style>
 </head>
 <body class="page-404">
+    <!-- Scroll Progress Indicator -->
+    <div id="scrollProgress"></div>
     <!-- Header & Navigation -->
     <header id="header" role="banner">
         <div class="container nav-container">
             <div class="logo">
                 <a href="index.html" aria-label="TrusPoint Solutions Home">
-                    <img src="/static/logo.jpg" alt="TrusPoint Solutions Logo">
+                    <img src="static/logo.jpg" alt="TrusPoint Solutions Logo">
                 </a>
             </div>
             <nav class="desktop-nav" role="navigation" aria-label="Main Navigation">
@@ -146,6 +148,7 @@
         <div class="floating-element floating-element-3"></div>
 
         <div class="container">
+            <div class="hero-badge"><span class="badge-dot"></span> Error 404</div>
             <div class="error-code">404</div>
             <h1 class="error-title">Page Not Found</h1>
             <p class="error-desc">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable. Let us help you get back on track.</p>
@@ -269,6 +272,33 @@
                 header.classList.remove('scrolled');
             }
         });
+    
+        // Million-Dollar Interactions: Scroll Progress & Back to Top
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const backToTop = document.getElementById('backToTop');
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            if (scrollProgress && scrollHeight > 0) {
+                scrollProgress.style.width = (scrollTop / scrollHeight) * 100 + '%';
+            }
+            if (backToTop) {
+                if (scrollTop > 350) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }
+        });
+        const backToTopBtn = document.getElementById('backToTop');
+        if (backToTopBtn) {
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    
     </script>
+    <!-- Back to Top Floating Action -->
+    <button id="backToTop" aria-label="Back to Top"><i class="fas fa-arrow-up"></i></button>
 </body>
 </html>
