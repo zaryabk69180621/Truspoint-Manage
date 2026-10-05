@@ -472,33 +472,51 @@ header.scrolled {
 }
 
 /* Dropdown Menu */
+.desktop-nav .dropdown {
+    position: relative;
+}
+
 .dropdown-content {
     display: none;
     position: absolute;
-    top: calc(100% + 12px);
+    top: calc(100% + 8px);
     left: -20px;
     background: #ffffff;
-    min-width: 270px;
+    min-width: 275px;
     border-radius: var(--radius-lg);
     box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(226, 232, 240, 0.7);
     padding: 0.65rem;
     z-index: 100;
-    animation: fadeInUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: fadeInUp 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Invisible hover bridge connecting nav item to dropdown menu so cursor never leaves hover zone */
+.dropdown-content::after {
+    content: '';
+    position: absolute;
+    top: -24px;
+    left: 0;
+    right: 0;
+    height: 24px;
+    background: transparent;
+    display: block;
 }
 
 .dropdown-content::before {
     content: '';
     position: absolute;
-    top: -12px;
+    top: -8px;
     left: 36px;
     width: 0;
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
     border-bottom: 8px solid #ffffff;
+    z-index: 2;
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown-content,
+.dropdown:focus-within .dropdown-content {
     display: block;
 }
 
@@ -1550,12 +1568,14 @@ footer h3::after {
 .timeline-section {
     padding: 7rem 0;
     background-color: var(--light);
+    position: relative;
+    overflow: hidden;
 }
 
 .timeline {
     position: relative;
-    max-width: 880px;
-    margin: 3.5rem auto 0;
+    max-width: 920px;
+    margin: 4rem auto 0;
     padding: 2rem 0;
 }
 
@@ -1566,71 +1586,127 @@ footer h3::after {
     bottom: 0;
     left: 50%;
     width: 3px;
-    background: var(--accent-gradient);
-    transform: translateX(-50%);
+    background: linear-gradient(180deg, var(--secondary) 0%, var(--accent) 50%, var(--secondary-dark) 100%);
+    transform: translateX(-50%) scaleY(0);
+    transform-origin: top center;
     border-radius: var(--radius-full);
+    box-shadow: 0 0 12px rgba(255, 107, 53, 0.35);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.timeline.animated::before {
+    transform: translateX(-50%) scaleY(1);
 }
 
 .timeline-item {
     position: relative;
     margin-bottom: 3.75rem;
     width: 50%;
-    padding: 0 2.75rem;
+    padding: 0 3rem;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .timeline-item:nth-child(odd) {
     left: 0;
     text-align: right;
+    transform: translateX(-40px);
 }
 
 .timeline-item:nth-child(even) {
     left: 50%;
     text-align: left;
+    transform: translateX(40px);
 }
 
-.timeline-year {
+.timeline-item.animated {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Glowing milestone node on the timeline line */
+.timeline-item::after {
+    content: '';
     position: absolute;
-    top: 0;
-    background: var(--accent-gradient);
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 0.9rem;
-    padding: 0.45rem 1.1rem;
-    border-radius: var(--radius-full);
-    box-shadow: 0 4px 14px rgba(255, 107, 53, 0.4);
-    z-index: 2;
+    top: 24px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 3.5px solid var(--secondary);
+    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.25), 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 3;
+    transition: transform 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
 }
 
-.timeline-item:nth-child(odd) .timeline-year {
-    right: -58px;
+.timeline-item:nth-child(odd)::after {
+    right: -9px;
 }
 
-.timeline-item:nth-child(even) .timeline-year {
-    left: -58px;
+.timeline-item:nth-child(even)::after {
+    left: -9px;
+}
+
+.timeline-item:hover::after {
+    background: var(--secondary);
+    box-shadow: 0 0 0 6px rgba(255, 107, 53, 0.35), 0 0 20px rgba(255, 107, 53, 0.6);
+    transform: scale(1.25);
 }
 
 .timeline-content {
     background: #ffffff;
-    padding: 2rem;
-    border-radius: var(--radius-lg);
+    padding: 2rem 2.25rem;
+    border-radius: var(--radius-xl);
     box-shadow: var(--shadow-card);
     border: 1px solid var(--border);
+    position: relative;
     transition: var(--transition);
 }
 
+.timeline-item:nth-child(odd) .timeline-content {
+    border-right: 3px solid var(--secondary);
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    border-left: 3px solid var(--secondary);
+}
+
 .timeline-content:hover {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
     box-shadow: var(--shadow-card-hover);
-    border-color: rgba(255, 107, 53, 0.35);
+    border-color: rgba(255, 107, 53, 0.4);
+}
+
+.timeline-year {
+    display: inline-flex;
+    align-items: center;
+    background: var(--secondary-tint);
+    color: var(--secondary);
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.35rem 0.9rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 107, 53, 0.25);
+    margin-bottom: 0.85rem;
+    box-shadow: 0 2px 6px rgba(255, 107, 53, 0.08);
+    position: static;
 }
 
 .timeline-content h3 {
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.65rem;
+    letter-spacing: -0.01em;
 }
 
 .timeline-content p {
-    font-size: 0.96rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--gray-dark);
     margin-bottom: 0;
 }
 
@@ -3068,25 +3144,36 @@ footer h3::after {
     .carousel-arrow.next { right: 15px; }
 
     .timeline::before {
-        left: 20px;
+        left: 24px;
+        transform: scaleY(0);
+    }
+
+    .timeline.animated::before {
+        transform: scaleY(1);
     }
 
     .timeline-item {
-        width: 100%;
-        padding-left: 55px;
-        padding-right: 0;
+        width: 100% !important;
+        left: 0 !important;
+        padding-left: 58px !important;
+        padding-right: 0 !important;
         text-align: left !important;
         margin-bottom: 2.5rem;
+        transform: translateX(-30px) !important;
     }
 
-    .timeline-item:nth-child(even) {
-        left: 0;
+    .timeline-item.animated {
+        transform: translateX(0) !important;
     }
 
-    .timeline-year {
-        left: 0 !important;
+    .timeline-item::after {
+        left: 15px !important;
         right: auto !important;
-        top: 0;
+    }
+
+    .timeline-item .timeline-content {
+        border-right: none !important;
+        border-left: 3px solid var(--secondary) !important;
     }
 }
 

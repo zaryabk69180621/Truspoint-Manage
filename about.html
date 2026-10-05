@@ -392,19 +392,19 @@
                     }
                     
                     if (entry.target.id === 'timeline') {
-                        const timelineLine = entry.target.querySelector('::before');
-                        if (timelineLine) {
-                            setTimeout(() => {
-                                timelineLine.classList.add('animated');
-                            }, 300);
-                        }
-                        
-                        const timelineItems = entry.target.querySelectorAll('.timeline-item');
-                        timelineItems.forEach((item, index) => {
+                        entry.target.classList.add('animated');
+                        const items = entry.target.querySelectorAll('.timeline-item');
+                        items.forEach((item, index) => {
                             setTimeout(() => {
                                 item.classList.add('animated');
-                            }, index * 300);
+                            }, index * 200);
                         });
+                    }
+
+                    if (entry.target.classList.contains('timeline-item')) {
+                        entry.target.classList.add('animated');
+                        const parent = entry.target.closest('.timeline');
+                        if (parent) parent.classList.add('animated');
                     }
                     
                     // Team Section
