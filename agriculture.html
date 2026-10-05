@@ -666,6 +666,12 @@
                         <a href="${service.link}" class="contact-btn" aria-label="Learn more about ${service.title}">Learn More</a>
                     </div>
                 `;
+                carouselItem.addEventListener('click', () => {
+                    if (carouselItem.classList.contains('prev')) prevSlide();
+                    else if (carouselItem.classList.contains('next')) nextSlide();
+                    else if (carouselItem.classList.contains('far-prev')) { prevSlide(); prevSlide(); }
+                    else if (carouselItem.classList.contains('far-next')) { nextSlide(); nextSlide(); }
+                });
                 carousel.appendChild(carouselItem);
 
                 // Create navigation dots
@@ -738,6 +744,21 @@
         // Event listeners for carousel navigation
         carouselPrev.addEventListener('click', prevSlide);
         carouselNext.addEventListener('click', nextSlide);
+
+        // Touch swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        carousel.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        carousel.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 45) {
+                nextSlide();
+            } else if (touchEndX - touchStartX > 45) {
+                prevSlide();
+            }
+        }, { passive: true });
 
         // Auto-rotate carousel
         let carouselInterval = setInterval(nextSlide, 5000);
