@@ -1742,6 +1742,8 @@ footer h3::after {
 .member-photo {
     height: 300px;
     overflow: hidden;
+    background-size: cover;
+    background-position: center;
 }
 
 .member-photo img {
@@ -1759,6 +1761,7 @@ footer h3::after {
     padding: 1.75rem;
 }
 
+.member-info h3,
 .member-info h4 {
     font-size: 1.3rem;
     margin-bottom: 0.25rem;
