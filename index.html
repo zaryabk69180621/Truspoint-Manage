@@ -215,16 +215,6 @@
         </ul>
     </div>
 
-    <!-- Agriculture Harvesting Popup -->
-    <div id="agriculturePopup" role="dialog" aria-labelledby="popup-title" aria-modal="true">
-        <div class="popup-content">
-            <div class="popup-close" id="closePopup" aria-label="Close popup" role="button" tabindex="0">×</div>
-            <h3 id="popup-title">Specialized Agriculture Harvesting Services</h3>
-            <p>Discover our premium harvesting solutions for vineyards and agricultural businesses. Expert teams, modern equipment, and proven methodologies.</p>
-            <a href="agriculture.html" class="cta-button">Explore Agriculture Services</a>
-        </div>
-    </div>
-
     <!-- Hero Section -->
     <section class="hero" role="banner">
         <!-- Floating Elements -->
@@ -673,27 +663,6 @@
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
-            }
-        });
-
-        // Agriculture Harvesting Popup functionality
-        const agriculturePopup = document.getElementById('agriculturePopup');
-        const closePopup = document.getElementById('closePopup');
-
-        // Show popup after 3 seconds
-        setTimeout(() => {
-            agriculturePopup.classList.add('active');
-        }, 3000);
-
-        // Close popup when X is clicked
-        closePopup.addEventListener('click', () => {
-            agriculturePopup.classList.remove('active');
-        });
-
-        // Close popup when clicking outside content
-        agriculturePopup.addEventListener('click', (e) => {
-            if (e.target === agriculturePopup) {
-                agriculturePopup.classList.remove('active');
             }
         });
 
