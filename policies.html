@@ -69,7 +69,7 @@
             "@type": "ItemList",
             "name": "Company Policies",
             "description": "Official policy documents and procedures",
-            "numberOfItems": 5,
+            "numberOfItems": 6,
             "itemListElement": [
                 {
                     "@type": "ListItem",
@@ -100,6 +100,12 @@
                     "position": 5,
                     "name": "Organization Mission",
                     "description": "Company vision, mission statement, and core values"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 6,
+                    "name": "Disability Confident Commitment",
+                    "description": "Accreditation and commitment to inclusive recruitment, accessible employment, and workplace equality (Ref: DCS049092)"
                 }
             ]
         }
@@ -225,6 +231,20 @@
                 <p>Access our comprehensive policy documents to understand our operational standards</p>
             </div>
             
+            <!-- Disability Confident Accreditation Highlight Banner -->
+            <div class="disability-banner" style="background: #ffffff; border-radius: var(--radius-md); border: 1px solid var(--border); padding: 1.5rem 2rem; margin-bottom: 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; box-shadow: var(--shadow-sm);">
+                <div style="display: flex; align-items: center; gap: 1.5rem; flex: 1; min-width: 280px;">
+                    <img src="static/disability-confident-committed.png" alt="Disability Confident Committed" style="height: 52px; width: auto; object-fit: contain;">
+                    <div>
+                        <h3 style="margin: 0 0 0.25rem; font-size: 1.15rem; color: var(--dark);">Disability Confident Committed Employer</h3>
+                        <p style="margin: 0; font-size: 0.92rem; color: var(--gray);">Certified under the UK Government Disability Confident scheme (Ref: DCS049092, 2026–2029). Committed to inclusive recruitment, accessible employment, and supporting disabled talent.</p>
+                    </div>
+                </div>
+                <a href="docs/disability-confident-certificate.pdf" download class="cta-button secondary-btn" style="padding: 0.65rem 1.25rem; font-size: 0.88rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+                    <i class="fas fa-download"></i> Download Certificate
+                </a>
+            </div>
+            
             <!-- Mobile Dropdown Selector -->
             <div class="mobile-policy-selector">
                 <select id="mobilePolicySelect">
@@ -234,6 +254,7 @@
                     <option value="quality-assurance.pdf">Quality Assurance Policy</option>
                     <option value="environmental-policy.pdf">Environmental Policy</option>
                     <option value="organization-mission.pdf">Organization Mission</option>
+                    <option value="disability-confident-certificate.pdf">Disability Confident Commitment (DCS049092)</option>
                 </select>
             </div>
             
@@ -276,6 +297,12 @@
                                     <a href="#" data-pdf="organization-mission.pdf">
                                         <i class="fas fa-file-pdf"></i>
                                         <span>Organization Mission</span>
+                                    </a>
+                                </li>
+                                <li class="policy-item">
+                                    <a href="#" data-pdf="disability-confident-certificate.pdf">
+                                        <i class="fas fa-file-pdf"></i>
+                                        <span>Disability Confident Commitment</span>
                                     </a>
                                 </li>
                             </ul>
@@ -339,11 +366,16 @@
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
+                    <div class="footer-badge">
+                        <a href="about.html#certifications" title="Disability Confident Committed Employer - Ref: DCS049092">
+                            <img src="static/disability-confident-committed.png" alt="Disability Confident Committed Employer" loading="lazy">
+                        </a>
+                    </div>
                 </div>
                 
                 <div class="footer-contact">
                     <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> 34 lewis road, Southall, London, UK</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Suite RA01, 195-197 Wood Street, London, E17 3NU</p>
                     <p><i class="fas fa-phone"></i> +447930862495</p>
                     <p><i class="fas fa-envelope"></i> info@truspoint.uk</p>
                     <p><i class="fas fa-globe"></i> www.truspoint.uk</p>
@@ -419,7 +451,8 @@
                 'complaints-procedure.pdf': 'Complaints Procedure',
                 'quality-assurance.pdf': 'Quality Assurance Policy',
                 'environmental-policy.pdf': 'Environmental Policy',
-                'organization-mission.pdf': 'Organization Mission'
+                'organization-mission.pdf': 'Organization Mission',
+                'disability-confident-certificate.pdf': 'Disability Confident Commitment (DCS049092)'
             };
             
             // Function to update PDF viewer
